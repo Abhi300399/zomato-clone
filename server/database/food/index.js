@@ -10,6 +10,10 @@ const FoodSchema=new mongoose.Schema({
     price:{type:Number,default:150,required:true},
     addOns:[{ type: mongoose.Types.ObjectId,ref:"Foods"}],
     restuarant:{type:mongoose.Types.ObjectId,ref:"Restaurants",required:true},
-});
+},
+{ 
+    timestamps:true,
+}
+);
 
 export const FoodModel=mongoose.model("Foods",FoodSchema);
