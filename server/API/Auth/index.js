@@ -2,6 +2,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import passport from "passport";
 
 //Models
 import {UserModel} from "../../database/user";
@@ -57,4 +58,13 @@ Router.post("/signin",async(req,res)=>{
     }
 });
 
+/*
+Route   /google
+Des    google signin
+Params  none
+Access  Public
+Method  GET
+*/
+
+Router.get("/google",passport.authenticate("google",{scope:["https://www.googleapis.com/auth/userinfo.profile","https://www.googleapis.com/auth/userinfo.email",]}))
 export default Router;
