@@ -1,4 +1,4 @@
-import mongoose from mongoose;
+import mongoose from "mongoose";
 
 const OrderSchema=new mongoose.Schema({
     users:{
@@ -24,4 +24,4 @@ const OrderSchema=new mongoose.Schema({
 }
 );
 
-export const OrderModel=mongoose.model("Orders",OrederSchema);
+export const OrderModel=mongoose.model("Orders",OrderSchema);
