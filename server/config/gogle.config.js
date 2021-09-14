@@ -10,7 +10,7 @@ export default (passport)=>{
         new GoogleStrategy({
             clientID:process.env.GOOGLE_CLIENT_ID,
             clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL:"http//localhost:4000/auth/google/callback",
+            callbackURL:"http://localhost:4000/auth/google/callback",
         },
         async(accessToken,refreshToken,profile,done)=>{
             const newUser={
@@ -21,12 +21,14 @@ export default (passport)=>{
             try{
                     const user=await UserModel.findOne({email:newUser.email});
 
-                    const token=user.generateIwtToken();
+                    
                     if(user){
+                        const token=user.generateJwtToken();
                         done(null,{user,token});
                     }
                     else{
                         const user=await UserModel.create(newUser);
+                        const token=user.generateJwtToken();
                         done(null,{user,token});
                     }
             } catch(error){

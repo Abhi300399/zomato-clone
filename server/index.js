@@ -24,6 +24,8 @@ zomato.use(express.json());
 zomato.use(express.urlencoded({extended:false}));
 zomato.use(helmet());
 zomato.use(cors());
+zomato.use(passport.initialize());
+zomato.use(passport.session());
 
 //passport configuration
 googleAuthConfig(passport);
