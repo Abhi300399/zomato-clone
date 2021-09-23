@@ -5,6 +5,10 @@ import passport from "passport";
 //Models
 import {OrderModel} from "../../database/allModels";
 
+
+//Validation
+import { ValidateRestaurantId } from "../../validation/food";
+
 const Router=express.Router();
 
 /*
@@ -16,6 +20,7 @@ Method  GET
 */
 Router.get("/:_id",async(req,res)=>{
     try{
+        await ValidateRestaurantId(req.params);
         const {_id}=req.params;
         const getOrders=await OrderModel.findOne({user:_id});
 
@@ -37,6 +42,7 @@ Method  POST
 */
 Router.post("/new/:_id",async(req,res)=>{
         try{
+            await ValidateRestaurantId(req.params);
             const {_id}=req.params;
             const {orderDetails}=req.body;
             const addNewOrder= await OrderModel.findOneAndUpdate({
